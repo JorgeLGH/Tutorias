@@ -1,0 +1,105 @@
+---
+title: "Tutoría de Matemáticas 2021"
+author: "Jorge Gómez"
+date: "8/16/2021"
+output: html_document
+---
+
+# Concepto prueba
+
+## Suma de vectores
+
+La suma de vectores se realiza mediante la suma de cada uno de los términos de forma individual, es decir, deben de coincidir las *X* con las *X*, así como las *Y* deben de asociarse unas con otras. La formula siguiente describe el proceso.
+$$
+\begin{align*}
+\overrightarrow{V_1}+\overrightarrow{V_2}=(X_1+X_2 , Y1+Y_2)
+\end{align*}
+$$
+Para una más fácil realización, se deben de sustituir los elementos antes de la fórmula con auqellos dados, de modo que es necesario tener muy en cuenta los signos de los términos habidos dentro de los vectores.
+
+## Resta de vectores
+
+Al igual que con la suma de vectores, la resta de vectores se realiza mediante la suma de cada uno de los términos de forma individual, es decir, deben de coincidir las *X* con las *X*, así como las *Y* deben de asociarse unas con otras. La formula siguiente describe el proceso.
+$$
+\begin{align*}
+\overrightarrow{V_1}-\overrightarrow{V_2}=(X_1-X_2 , Y1-Y_2)\\
+\end{align*} 
+$$
+Para evitar problemas, es recomendable sustituir los valores en la fórmula para evitar complicaciones con los signos propios de los valores de los vectores.
+
+## Magnitud de vector
+
+Para realizar esta operación, primero se deben de determinar los términos que van a estar dentro de la raíza cuadrada, pues se deben de resolver antes de cubrir la raíza cuadrada. De este modo queda en orden:
+
+1. Determinar valores que irán dentro de la raíz cuadrada.
+2. Resolver y simplificar los valores elevados al cuadrado. **Todo número real se vuelve positivo al elevarse al cuadrado**
+3. Resolver raíz cuadrada.
+4. Simplificar en caso de que se quiera/pueda/necesite.
+
+$$
+\begin{align*}
+\overrightarrow{V_1}=(X,Y)\\
+||\overrightarrow{V_1}||=\sqrt{x^2+y^2}\\
+\end{align*}
+$$
+
+## Producto escalar interno
+
+Así como en la suma y resta de vectores se realiza mediante la suma de cada uno de los términos de forma individual, es decir, deben de coincidir las *X* con las *X*, mientras que las *Y* deben de asociarse unas con otras. La formula siguiente describe el proceso.
+$$
+\begin{align*}
+\overrightarrow{V_1}*\overrightarrow{V_2}=X_1*X_2+Y_1*Y_2
+\end{align*}
+$$
+
+Describiendo el proceso, se deben de tomar las parejas de los números y multiplicarlos, siempre recordando que las *X's* siempre van con las *X's* y las *Y's* con las *Y's*. Una vez que se multiplican, se suman. A diferencia de la suma y resta de vectores, el producto escalar interno *NO* nos arroja un vector.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ecuaciones sistema SIRS con demografía
+$$
+\begin{eqnarray}
+\dot{S}= -\mu S-\beta SI+\nu + \delta R\\
+\dot{I}= -\mu I+\beta SI- \gamma I\\
+\dot{R}= -\mu R-\delta R+ \gamma I
+\end{eqnarray}
+$$
+1.- Todas las tasas de *mu* son de mortalidad, por lo que respectivamente son restas en sus ecuaciones.
+
+2.- La interacción de los susceptibles con los infectados va a gnerar un cambio de individuos susceptibles a infectados a una tasa *beta*, por lo que es negativo en la ecuación de los susceptibles pero positivo en la de infectados.
+
+3.- *nu* es positiva en la ecuación de susceptibles porque los recién nacido no poseen la enfermedad ni resistencia, lo que los hace susceptibles por default.
+
+4.- *delta**R* señala la pérdida de resistencia de los individuos, por loque esto tiene signo positivo para los susceptibles y negativos para los que tienen resistencia.
+
+5.- *gamma**I* señala el cambio de los infectados que se recuperan y obtienen reistencia, por lo que en la ecuación de los infectados le resta, mientras que esta tasa de cambio es positiva en la ecuación de los resistentes.
+
+*Demostrar que la población se conserva*
+
+$$
+\begin{eqnarray}
+\dot{S}+\dot{I}+\dot{R}= \nu - \mu (S+I+R)= \nu-\mu =0\\
+N(t)=cte
+\end{eqnarray}
+$$
+La tasa de natalidad debe de ser igual a la tasa de mortalidad para que la población se conserve.
+
+
+
+
+
+
+
+
+
