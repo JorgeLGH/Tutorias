@@ -1,0 +1,104 @@
+---
+title: "Uso básico de R"
+author: "Jorge Luis Gómez"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document: 
+    fig_height: 8
+    fig_width: 13
+    number_section: yes
+    theme: cosmo
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+  pdf_document:
+    toc: yes
+  word_document:
+    toc: yes
+    includes: \usepackage{amsmath}
+---
+
+# Introducción
+
+La licenciatura en Microbiología, al menos a la fecha (agosto del 2022), es la única licenciatura de Microbiología **en todo el país**. Esto nos hace únicos en su propio derecho, pero varias de las materias que tenemos, así como el enfoque de las mismas, son lo que realmente nos hace diferentes a la gran diversidad de licenciaturas que existen en otras universidades a lo largo de México; siendo un caso particular, el uso del lenguaje de programación R. Es necesaria una aclaración, la cual
+
+Originalemente, R se generó como un lenguaje enfocado para el cómputo estadístico y es muy similar al lenguaje S; no obstante, este lenguaje ha visto su desarrollo a una variedad de aplicaciones como la bioinformática y la ciencia de datos [^1]. R cuenta con una gran cantidad de técnicas estadísticas y para la generación de gráficas que le permite ser una de las herramientas más utilizadas en la bioinformática actual [^2].
+
+El siguiente documento es solo una pequeña introducción al lenguaje R basado en la experiencia de los estudiantes que han generado este trabajo, así como de aquellos que seguirán refinando este trabajo. Si tienes dudas concretas que no estén en esta introducción, no tengas miedo de preguntarle a tus docentes. Si así lo prefieres, también puedes buscar por tu propia cuenta o basar tus esfurzos en recursos tales como los que mostramos en [esta sección](#recursos-adicionales). 
+
+**Cabe recalcar que la mayoría de los recursos habidos están en inglés, por lo que algunos de los ejemplos o conceptos se manejarán en dicho idioma para facilitar su búsqueda**
+
+# Tipos de datos
+
+De primera instancia, vamos a conocer algunos de los tipos de datos que pueden existir en R. Cada uno de estos tipos tienen sus ventajas, deventajas, usos y momentos adecuados en los cuales será más conveniente usar uno por sobre otro, pero no te preocupes, esto mejorará conforme la experiencia. En la siguiente tabla te presentamos algunos de los tipos de datos más básicos que utilizarás en R.
+
+| Tipo de dato   | Ejemplo    |
+| -------------- | ---------- |
+|     numeric    |     64.3   |
+|     integer    |     12     |
+|     logical    |     TRUE   |
+|     character  |    "apple" |
+
+## Numeric
+
+Este tipo de dato representa todos los datos numéricos, tengan decimales o no. A continuación veremos un ejemplo.
+
+```{r}
+altura <- 1.75
+peso <- 79
+```
+```{r}
+print(class(altura))
+print(class(peso))
+```
+
+En este punto es importante denotar algunas cosas. En la siguiense sección veremos los objetos `integer`, los cuales son relativamente similares, pero debe de quedar en claro que los objetos `numeric` representan cualquier número real, más no aquellos imaginarios.
+
+De la misma manera, vemos el uso de dos funciones útiles, `print()` y `class()`. Estas funciones lo que hacen es imprimir/visualizar un objeto y decirte el tipo de dicho objeto, respectivamente. 
+
+## Integer
+
+Este tipo de dato es muy parecido al numérico que recién vimos; sin embargo, tiene una diferencia clave **no considera decimales**. En otras palabras, solo puede manejar números enteros, sean negativos o positivios. En ocasiones, cuando asignamos un valor a nuestro objeto o variable, pese a ser un número entero, lo considera `numeric`, por lo que se puede usar el sufijo `L` para denotarlo.
+
+```{r}
+inte <- 16L
+```
+```{r}
+print(class(inte))
+```
+
+## Logical
+
+Si llevaste en algún punto de tu formación, temas de lógica Booleana, este tipo de dato será sencillo para ti. En este caso, los valores de este tipo de datos solo pueden ser dos: **TRUE** o **FALSE** (verdadera y falso). Este tipo de dato se obtiene tras evaluar condiciones o al poner el input de manera directa. Podemos ver unos ejemplos a continuación.
+
+```{r}
+# Evaluar una condición
+
+res <- 2>1
+print(class(res))
+print(res)
+```
+```{r}
+# Asignar el input de manera directa
+
+res <- FALSE
+print(class(res))
+print(res)
+```
+
+## Character
+
+Este tipo de datos es igualmente muy común y conformará parte esencial de tus trabajos y tareas que desarrollarás en el lenguaje R. 
+
+# Recursos adicionales
+
+1. https://www.r-project.org
+2. http://www.cookbook-r.com
+3. https://www.statmethods.net
+4. https://r-coder.com/introduccion-r/
+
+# Bibliografía 
+
+[^1]: https://www.r-project.org
+[^2]: Gentleman, Robert; Carey, Vincent J.; Huber, Wolfgang; Irizarry, Rafael A.; Dudoit, Sandrine  (2005). [Statistics for Biology and Health] Bioinformatics and Computational Biology Solutions Using R and Bioconductor, 10.1007/0-387-29362-0(), doi:10.1007/0-387-29362-0.
