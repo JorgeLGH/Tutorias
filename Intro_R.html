@@ -1535,7 +1535,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Uso básico de R</h1>
 <h4 class="author">Jorge Luis Gómez</h4>
-<h4 class="date">29 July, 2022</h4>
+<h4 class="date">01 August, 2022</h4>
 
 </div>
 
@@ -1660,13 +1660,86 @@ print(class(res))</code></pre>
 </div>
 <div id="character" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Character</h2>
-<p>Este tipo de datos es igualmente muy común y conformará parte
-esencial de tus trabajos y tareas que desarrollarás en el lenguaje
-R.</p>
+<p>Este tipo de dato es igualmente muy común y conformará parte esencial
+de tus trabajos y tareas que desarrollarás en el lenguaje R. En
+particular, este tipo de dato se refiere a todos aquellos que sean
+caracteres simples o <em>strings</em> completos de caracteres.</p>
+<pre class="r"><code># ejemplo de caracter aislado
+
+cha &lt;- &quot;A&quot;
+
+print(class(cha))</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code># ejemplo de string de caracteres
+
+stg &lt;- &quot;string&quot;
+
+print(class(stg))</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
 </div>
 </div>
-<div id="recursos-adicionales" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Recursos
+<div id="data-structures" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Data structures</h1>
+<p>Las estructuras de datos se refiere a un modo particular en el que se
+organizan datos para poder manipularlos de manera más eficiente. La idea
+es tener estructuras especializadas para las diferentes tareas que se
+pueden realizar no solo en R, sino, que en los lenguajes de programación
+en general. Básicamente, podemos clasificar las estructuras según sus
+dimensiones (1D, 2D nD). Si bien se pueden organizar según sus
+dimensiones, estas estructuras de datos se pueden conformar por todos
+los tipos de datos que se discutieron anteriormente y más. De forma
+común no se mezclan todos los tipos de dato en una sola estructura, pero
+no podemos decir realmente que son inexistentes <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p>En particular, esta introducción discutirá algunas de las estructuras
+de datos más comunes. A continuación aprenderemos acerca de vectores,
+listas, dataframes, matrices, arrays, factores y tablas.</p>
+<div id="vectores" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Vectores</h2>
+<p>Un vector, dicho de manera simple, es una colección ordenada de una
+longitud <em>n</em> que se conforma por cualquier tipo de dato básico.
+Este tipo de estructura de dato debe de contener la misma clase de dato,
+por lo que se considera que es homogéneo.</p>
+<p>La forma más sencilla de generar un vector en R es a través del uso
+de la función <code>c()</code>. <strong>Cada elemento dentro de nuestro
+vector, el cual es unidimensional, debe de estar sperado por una
+coma</strong>, de lo contrario, R nos arrojará un error que no se puede
+leer el vector y no podremos guardar datos ni asignar objetos o
+variables.</p>
+<pre class="r"><code>first_vector &lt;- c(1,2,3,4,5,5,2,3,4,2)
+
+first_vector</code></pre>
+<pre><code>##  [1] 1 2 3 4 5 5 2 3 4 2</code></pre>
+<p>Como se acaba de demostrar, no siempre es necesario usar la función
+<code>print()</code> para imprimir nuestro objeto; sin embargo, a lo
+largo de esta guía se usará para señalar de manera explícita que
+buscamos imprimir nuestro objeto. Esto solo fue una demostración.</p>
+<p>Ahora, una parte importante de los vectores, es la longitud de los
+mismos, por lo que la función <code>length()</code> será muy útil desde
+los niveles más básicos, hasta lo más avanzado.</p>
+<pre class="r"><code>print(length(first_vector))</code></pre>
+<pre><code>## [1] 10</code></pre>
+</div>
+<div id="listas" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Listas</h2>
+</div>
+<div id="dataframes" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Dataframes</h2>
+</div>
+<div id="matrices" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Matrices</h2>
+</div>
+<div id="arrays" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Arrays</h2>
+</div>
+<div id="factores" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Factores</h2>
+</div>
+<div id="tablas" class="section level2" number="3.7">
+<h2><span class="header-section-number">3.7</span> Tablas</h2>
+</div>
+</div>
+<div id="recursos-adicionales" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Recursos
 adicionales</h1>
 <ol style="list-style-type: decimal">
 <li><a href="https://www.r-project.org" class="uri">https://www.r-project.org</a></li>
@@ -1675,8 +1748,8 @@ adicionales</h1>
 <li><a href="https://r-coder.com/introduccion-r/" class="uri">https://r-coder.com/introduccion-r/</a></li>
 </ol>
 </div>
-<div id="bibliografía" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Bibliografía</h1>
+<div id="bibliografía" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Bibliografía</h1>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr />
@@ -1686,6 +1759,7 @@ adicionales</h1>
 Irizarry, Rafael A.; Dudoit, Sandrine (2005). [Statistics for Biology
 and Health] Bioinformatics and Computational Biology Solutions Using R
 and Bioconductor, 10.1007/0-387-29362-0(), <a href="doi:10.1007/0-387-29362-0" class="uri">doi:10.1007/0-387-29362-0</a>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://www.geeksforgeeks.org/data-structures-in-r-programming/" class="uri">https://www.geeksforgeeks.org/data-structures-in-r-programming/</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
