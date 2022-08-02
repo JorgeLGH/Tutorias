@@ -89,7 +89,62 @@ print(res)
 
 ## Character
 
-Este tipo de datos es igualmente muy común y conformará parte esencial de tus trabajos y tareas que desarrollarás en el lenguaje R. 
+Este tipo de dato es igualmente muy común y conformará parte esencial de tus trabajos y tareas que desarrollarás en el lenguaje R. En particular, este tipo de dato se refiere a todos aquellos que sean caracteres simples o *strings* completos de caracteres.
+
+```{r}
+# ejemplo de caracter aislado
+
+cha <- "A"
+
+print(class(cha))
+```
+```{r}
+# ejemplo de string de caracteres
+
+stg <- "string"
+
+print(class(stg))
+```
+
+# Data structures
+
+Las estructuras de datos se refiere a un modo particular en el que se organizan datos para poder manipularlos de manera más eficiente. La idea es tener estructuras especializadas para las diferentes tareas que se pueden realizar no solo en R, sino, que en los lenguajes de programación en general. Básicamente, podemos clasificar las estructuras según sus dimensiones (1D, 2D nD). Si bien se pueden organizar según sus dimensiones, estas estructuras de datos se pueden conformar por todos los tipos de datos que se discutieron anteriormente y más. De forma común no se mezclan todos los tipos de dato en una sola estructura, pero no podemos decir realmente que son inexistentes [^3].
+
+En particular, esta introducción discutirá algunas de las estructuras de datos más comunes. A continuación aprenderemos acerca de vectores, listas, dataframes, matrices, arrays, factores y tablas.
+
+## Vectores
+
+Un vector, dicho de manera simple, es una colección ordenada de una longitud *n* que se conforma por cualquier tipo de dato básico. Este tipo de estructura de dato debe de contener la misma clase de dato, por lo que se considera que es homogéneo. 
+
+La forma más sencilla de generar un vector en R es a través del uso de la función `c()`. **Cada elemento dentro de nuestro vector, el cual es unidimensional, debe de estar sperado por una coma**, de lo contrario, R nos arrojará un error que no se puede leer el vector y no podremos guardar datos ni asignar objetos o variables. 
+
+```{r}
+first_vector <- c(1,2,3,4,5,5,2,3,4,2)
+
+first_vector
+```
+
+Como se acaba de demostrar, no siempre es necesario usar la función `print()` para imprimir nuestro objeto; sin embargo, a lo largo de esta guía se usará para señalar de manera explícita que buscamos imprimir nuestro objeto. Esto solo fue una demostración.
+
+Ahora, una parte importante de los vectores, es la longitud de los mismos, por lo que la función `length()` será muy útil desde los niveles más básicos, hasta lo más avanzado.
+
+```{r}
+print(length(first_vector))
+```
+
+## Listas
+
+
+
+## Dataframes
+
+## Matrices
+
+## Arrays
+
+## Factores
+
+## Tablas
 
 # Recursos adicionales
 
@@ -102,3 +157,4 @@ Este tipo de datos es igualmente muy común y conformará parte esencial de tus 
 
 [^1]: https://www.r-project.org
 [^2]: Gentleman, Robert; Carey, Vincent J.; Huber, Wolfgang; Irizarry, Rafael A.; Dudoit, Sandrine  (2005). [Statistics for Biology and Health] Bioinformatics and Computational Biology Solutions Using R and Bioconductor, 10.1007/0-387-29362-0(), doi:10.1007/0-387-29362-0.
+[^3]: https://www.geeksforgeeks.org/data-structures-in-r-programming/
