@@ -1535,7 +1535,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Uso básico de R</h1>
 <h4 class="author">Jorge Luis Gómez</h4>
-<h4 class="date">10 August, 2022</h4>
+<h4 class="date">11 August, 2022</h4>
 
 </div>
 
@@ -1692,7 +1692,7 @@ común no se mezclan todos los tipos de dato en una sola estructura, pero
 no podemos decir realmente que son inexistentes <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
 <p>En particular, esta introducción discutirá algunas de las estructuras
 de datos más comunes. A continuación aprenderemos acerca de vectores,
-listas, dataframes, matrices, arrays, factores y tablas.</p>
+listas, dataframes y matrices.</p>
 <div id="vectores" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Vectores</h2>
 <p>Un vector, dicho de manera simple, es una colección ordenada de una
@@ -1820,19 +1820,235 @@ print(df_1)</code></pre>
 </div>
 <div id="matrices" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Matrices</h2>
+<p>Este tipo de estructura tiene un solo tipo de dato, por lo que se
+considera homogénea. Así como en matemáticas, las matrices son muy
+usadas en este lenguaje, por la propia naturaleza con la que se creó y
+se mencionó en la introducción, por lo que los datos en las matrices son
+numéricos y se trabaja con ellos en este modo<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. El modo de leer una
+matriz, así como un dataframe, se hace leyendo primero el renglón y
+luego la clumna (x,y).</p>
+<p>Existen varios modos de generar matrices desde cero, así que en este
+caso veremos cómo e que se hace en una sola línea de código. Para este
+fin, usaremos la función <code>matrix()</code> con la cual podemos crear
+nuestras matrices.</p>
+<pre class="r"><code>mat_1 &lt;- matrix(1:10)
+
+print(mat_1)</code></pre>
+<pre><code>##       [,1]
+##  [1,]    1
+##  [2,]    2
+##  [3,]    3
+##  [4,]    4
+##  [5,]    5
+##  [6,]    6
+##  [7,]    7
+##  [8,]    8
+##  [9,]    9
+## [10,]   10</code></pre>
+<p>Al observar este ejemplo, creamos de manera directa una matriz con
+una sola columna, pero con 10 renglones. Ahora veremos cómo se hacen
+varias columnas con varios renglones, asignando el número de dichos
+elementos que deseamos conformen nuestra matriz.</p>
+<pre class="r"><code>mat_2 &lt;- matrix(1:12, nrow=4,ncol=3)
+
+print(mat_2)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12</code></pre>
+<p>En este caso, asignamos 12 elementos numéricos en cuatro renglones y
+tres columnas. Es necesario recordar que los elementos deben de ser
+repartibles en el número de columnas y renglones que escogimos, de otro
+modo se omitirán o repitirán datos.</p>
+<pre class="r"><code>mat_3 &lt;- matrix(1:2, nrow=4,ncol=3)
+
+print(mat_3)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    1    1
+## [2,]    2    2    2
+## [3,]    1    1    1
+## [4,]    2    2    2</code></pre>
+<pre class="r"><code>mat_4 &lt;- matrix(1:20, nrow=4,ncol=3)</code></pre>
+<pre><code>## Warning in matrix(1:20, nrow = 4, ncol = 3): data length [20] is not a sub-
+## multiple or multiple of the number of columns [3]</code></pre>
+<pre class="r"><code>print(mat_4)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12</code></pre>
 </div>
-<div id="arrays" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> Arrays</h2>
 </div>
-<div id="factores" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Factores</h2>
+<div id="operadores" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Operadores</h1>
+<p>R contiene una variedad de operadores para llevar a cabo operaciones
+matemáticas<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>, desde las más sencillas, hasta procesos
+complejos que requieren mucho procesamiento. En esta sección abarcaremos
+dos tipos de operador, los aritméticos y los relacionales. Para poder
+entender mejor el uso de estos operadores es necesario tener claras las
+bases indispensables de matemáticas y es recomendable, en el caso de los
+operadores relacionales, conocer acerca de lógica, aunque no es
+necesario.</p>
+<p>Si tienes problemas en esta sección, más allá de poder comprender el
+código, te recomiendo fuertemente que busques algún curso de matemáticas
+para reforzar tu conocimiento, pueto que esto es parte de lo mínimo
+indispensable para poder programar de manera decente. No te preocupes si
+lo necesitas, es mejor saber cuándo volver a las bases antes de seguir
+con algo que probablemente no se entenderá del todo.</p>
+<div id="operadores-aritméticos" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Operadores
+aritméticos</h2>
+<p>Tal como dice su nombre, estos operadores son utilizados para llevar
+a cabo operaciones matemáticas. Todas las operaciones matemáticas con
+soluciones numéricas que puedas imaginar, son solucionables en R, así
+que no tengas miedo en probar. A continuación te muestro una tabla con
+los operadores aritméticos que cubriremos en este módulo.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>+</td>
+<td>Suma</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>Resta</td>
+</tr>
+<tr class="odd">
+<td>*</td>
+<td>Multiplicación</td>
+</tr>
+<tr class="even">
+<td>/</td>
+<td>División</td>
+</tr>
+<tr class="odd">
+<td>^</td>
+<td>Exponente</td>
+</tr>
+<tr class="even">
+<td>%%</td>
+<td>Módulo</td>
+</tr>
+</tbody>
+</table>
+<p>La suma es representada tal como se nos enseña cuando somos niños,
+usamos el signo <strong>+</strong>.</p>
+<pre class="r"><code>2+2</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>123123123+456456+4565</code></pre>
+<pre><code>## [1] 123584144</code></pre>
+<pre class="r"><code>123+45354+234+234</code></pre>
+<pre><code>## [1] 45945</code></pre>
+<p>Tenemos la resta, la cual se representa del mismo modo que en las
+matemáticas básicas que todos conocemos.</p>
+<pre class="r"><code>123-4-234</code></pre>
+<pre><code>## [1] -115</code></pre>
+<pre class="r"><code>123123-12-3-214-124</code></pre>
+<pre><code>## [1] 122770</code></pre>
+<p>En el caso de la multiplicación, usaremos el asterisco * para
+representar esta operación.</p>
+<pre class="r"><code>123*234</code></pre>
+<pre><code>## [1] 28782</code></pre>
+<pre class="r"><code>1*2*3*4*5</code></pre>
+<pre><code>## [1] 120</code></pre>
+<p>En el caso de la división, usamos la diagonal <strong>/</strong> para
+representar esta operación, así que usa la misma lógica que
+conocemos.</p>
+<pre class="r"><code>123/324</code></pre>
+<pre><code>## [1] 0.3796296</code></pre>
+<pre class="r"><code>567/789</code></pre>
+<pre><code>## [1] 0.7186312</code></pre>
+<pre class="r"><code>6789679/234</code></pre>
+<pre><code>## [1] 29015.72</code></pre>
+<p>Para representar exponentes, usamos el símbolo de caret
+<strong>^</strong> para poder asignar esta operación. Cabe recarlcar que
+considerará todo el número después de este símbolo como el exponente
+hasta que haya algún otro operador o un espacio.</p>
+<pre class="r"><code>2^4</code></pre>
+<pre><code>## [1] 16</code></pre>
+<pre class="r"><code>12^7</code></pre>
+<pre><code>## [1] 35831808</code></pre>
+<pre class="r"><code>1^1+1</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>Usamos el operador modulo <strong>%%</strong> para obtener solo el
+residuo de una división del número de la izquierda entre el de la
+derecha. Suena un tanto extraño, quizás no lo esté explicando bien, pero
+quedará claro con los siguientes ejemplos.</p>
+<pre class="r"><code>10%%3</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>10%%2</code></pre>
+<pre><code>## [1] 0</code></pre>
+<p>Como vemos, se puede ver que tras dividir 10/3, nuestro residuo es 1;
+lo cual es nos arroja la operación.</p>
+<p>Dicho de manera sencilla, R puede fungir como nuestra calculadora con
+un poder para procesar impresionante. es importante saber que el
+lenguaje y lo que nos arroja no fallará, pero nuestra sintaxis y datos
+puede que sí. En este sentido debemos de ser muy conscientes que
+nuestros inputs deben de ser claros, pues de otro modo fallará por más
+preciso que sea R.</p>
 </div>
-<div id="tablas" class="section level2" number="3.7">
-<h2><span class="header-section-number">3.7</span> Tablas</h2>
+<div id="operadores-relacionales" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Operadores
+relacionales</h2>
+<p>Los operadores relacionales son usados básicamente para hacer
+comparaciones entre distintos valores. El resultado del uso de estos
+operadores nos devuelve un valor Booleano, de modo que nunca nos
+devolverá un valor numérico per se aún cuando estemos comparando númers;
+aunque igualmente podemos comparar datos que no sean numéricos.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operador</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&lt;</td>
+<td>Menor que</td>
+</tr>
+<tr class="even">
+<td>&gt;</td>
+<td>Mayor que</td>
+</tr>
+<tr class="odd">
+<td>&lt;=</td>
+<td>Menor o igual que</td>
+</tr>
+<tr class="even">
+<td>&gt;=</td>
+<td>Mayor o igual que</td>
+</tr>
+<tr class="odd">
+<td>==</td>
+<td>Igual que</td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td>No igual que</td>
+</tr>
+</tbody>
+</table>
+<p>Primero, veremos el menor que, el cual es representado, al igual que
+cuando somos niños, por su propio símbolo. <strong>&lt;</strong> En este
+ejemplo veremos que puede ser usado no solo en números.</p>
+<pre class="r"><code>12&lt;123</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>1&lt;0</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>&quot;a&quot;&lt;&quot;v&quot;</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
-<div id="recursos-adicionales" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Recursos
+<div id="recursos-adicionales" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Recursos
 adicionales</h1>
 <ol style="list-style-type: decimal">
 <li><a href="https://www.r-project.org" class="uri">https://www.r-project.org</a></li>
@@ -1841,8 +2057,8 @@ adicionales</h1>
 <li><a href="https://r-coder.com/introduccion-r/" class="uri">https://r-coder.com/introduccion-r/</a></li>
 </ol>
 </div>
-<div id="bibliografía" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Bibliografía</h1>
+<div id="bibliografía" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Bibliografía</h1>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr />
@@ -1853,6 +2069,8 @@ Irizarry, Rafael A.; Dudoit, Sandrine (2005). [Statistics for Biology
 and Health] Bioinformatics and Computational Biology Solutions Using R
 and Bioconductor, 10.1007/0-387-29362-0(), <a href="doi:10.1007/0-387-29362-0" class="uri">doi:10.1007/0-387-29362-0</a>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p><a href="https://www.geeksforgeeks.org/data-structures-in-r-programming/" class="uri">https://www.geeksforgeeks.org/data-structures-in-r-programming/</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://bookdown.org/jboscomendoza/r-principiantes4/matrices-y-arrays.html" class="uri">https://bookdown.org/jboscomendoza/r-principiantes4/matrices-y-arrays.html</a><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://www.datamentor.io/r-programming/operator/" class="uri">https://www.datamentor.io/r-programming/operator/</a><a href="#fnref5" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
