@@ -302,7 +302,7 @@ Los operadores relacionales son usados básicamente para hacer comparaciones ent
 |     <=   |    Menor o igual que |
 |     >=   |    Mayor o igual que |
 |     ==   |    Igual que         |
-|     !=   |    No igual que      |
+|     !=   |No igual/diferente que|
 
 Primero, veremos el menor que, el cual es representado, al igual que cuando somos niños, por su propio símbolo. **<** En este ejemplo veremos que puede ser usado no solo en números. 
 
@@ -312,35 +312,55 @@ Primero, veremos el menor que, el cual es representado, al igual que cuando somo
 "a"<"v"
 ```
 
-
-
-```{r}
-
-```
-
-
+A continuación usaremos el operador mayor que, el cual es igualmente representado con **>**.
 
 ```{r}
-
+1>2
+12>23
+43>2
+"a">"b"
 ```
 
-
+En algunos casos queremos que se cumplan ciertos criterios, como que sea menor o igual, no siempre debe de ser menor; en este caso usamos una combinación entre el símbolo de menor que acompañado con un signo de igual.
 
 ```{r}
-
+12<=45
+456<=12
+2<=2
 ```
 
-
+Tal como con el operador anterior, usamos la misma lógiuca para cuando queremos valores iguales o mayores que otro.
 
 ```{r}
-
+12>=123
+5678>=324
+5>=5
 ```
 
-
+Cuando queremos demostrar igualdades, usamos dos signos de igual juntos, sin espacio. Solo en casos que tengan el mismo valor será un resultado **TRUE**, de lo contrario, y por obviedad, **FALSE**.
 
 ```{r}
-
+234==234
+23.00001==23.0000001
 ```
+
+Consideremos lo que previamente habíamos dicho, no solo aplica con números, incluso podemos usar vectores u otras estructuras con caracteres o cualquier combinación que imaginemos
+
+```{r}
+vc_1 <- c("a","b","c")
+vc_2 <- c("c","b","a")
+
+vc_1==vc_2
+```
+
+Finalmente, veremos el operador *NO es igual/es diferente que*, el cual combina un signo de exclamación junto con un signo de igual.
+
+```{r}
+"a" != "a"
+"c" != 1
+22 != 22
+```
+
 # Recursos adicionales
 
 1. https://www.r-project.org
