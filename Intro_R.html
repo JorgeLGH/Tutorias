@@ -2032,7 +2032,7 @@ aunque igualmente podemos comparar datos que no sean numéricos.</p>
 </tr>
 <tr class="even">
 <td>!=</td>
-<td>No igual que</td>
+<td>No igual/diferente que</td>
 </tr>
 </tbody>
 </table>
@@ -2045,6 +2045,59 @@ ejemplo veremos que puede ser usado no solo en números.</p>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>&quot;a&quot;&lt;&quot;v&quot;</code></pre>
 <pre><code>## [1] TRUE</code></pre>
+<p>A continuación usaremos el operador mayor que, el cual es igualmente
+representado con <strong>&gt;</strong>.</p>
+<pre class="r"><code>1&gt;2</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>12&gt;23</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>43&gt;2</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>&quot;a&quot;&gt;&quot;b&quot;</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>En algunos casos queremos que se cumplan ciertos criterios, como que
+sea menor o igual, no siempre debe de ser menor; en este caso usamos una
+combinación entre el símbolo de menor que acompañado con un signo de
+igual.</p>
+<pre class="r"><code>12&lt;=45</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>456&lt;=12</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>2&lt;=2</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Tal como con el operador anterior, usamos la misma lógiuca para
+cuando queremos valores iguales o mayores que otro.</p>
+<pre class="r"><code>12&gt;=123</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>5678&gt;=324</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>5&gt;=5</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Cuando queremos demostrar igualdades, usamos dos signos de igual
+juntos, sin espacio. Solo en casos que tengan el mismo valor será un
+resultado <strong>TRUE</strong>, de lo contrario, y por obviedad,
+<strong>FALSE</strong>.</p>
+<pre class="r"><code>234==234</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>23.00001==23.0000001</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>Consideremos lo que previamente habíamos dicho, no solo aplica con
+números, incluso podemos usar vectores u otras estructuras con
+caracteres o cualquier combinación que imaginemos</p>
+<pre class="r"><code>vc_1 &lt;- c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;)
+vc_2 &lt;- c(&quot;c&quot;,&quot;b&quot;,&quot;a&quot;)
+
+vc_1==vc_2</code></pre>
+<pre><code>## [1] FALSE  TRUE FALSE</code></pre>
+<p>Finalmente, veremos el operador <em>NO es igual/es diferente
+que</em>, el cual combina un signo de exclamación junto con un signo de
+igual.</p>
+<pre class="r"><code>&quot;a&quot; != &quot;a&quot;</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>&quot;c&quot; != 1</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>22 != 22</code></pre>
+<pre><code>## [1] FALSE</code></pre>
 </div>
 </div>
 <div id="recursos-adicionales" class="section level1" number="5">
