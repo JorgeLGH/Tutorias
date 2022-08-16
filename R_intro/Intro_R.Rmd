@@ -1,0 +1,548 @@
+---
+title: "Uso básico de R"
+author: "Jorge Luis Gómez"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document: 
+    fig_height: 8
+    fig_width: 13
+    number_section: yes
+    theme: cosmo
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+  pdf_document:
+    toc: yes
+  word_document:
+    toc: yes
+    includes: \usepackage{amsmath}
+---
+
+# Introducción
+
+La licenciatura en Microbiología, al menos a la fecha (agosto del 2022), es la única licenciatura de Microbiología **en todo el país**. Esto nos hace únicos en su propio derecho, pero varias de las materias que tenemos, así como el enfoque de las mismas, son lo que realmente nos hace diferentes a la gran diversidad de licenciaturas que existen en otras universidades a lo largo de México; siendo un caso particular, el uso del lenguaje de programación R. Es necesaria una aclaración, la cual
+
+Originalemente, R se generó como un lenguaje enfocado para el cómputo estadístico y es muy similar al lenguaje S; no obstante, este lenguaje ha visto su desarrollo a una variedad de aplicaciones como la bioinformática y la ciencia de datos [^1]. R cuenta con una gran cantidad de técnicas estadísticas y para la generación de gráficas que le permite ser una de las herramientas más utilizadas en la bioinformática actual [^2].
+
+El siguiente documento es solo una pequeña introducción al lenguaje R basado en la experiencia de los estudiantes que han generado este trabajo, así como de aquellos que seguirán refinando este trabajo. Si tienes dudas concretas que no estén en esta introducción, no tengas miedo de preguntarle a tus docentes. Si así lo prefieres, también puedes buscar por tu propia cuenta o basar tus esfurzos en recursos tales como los que mostramos en [esta sección](#recursos-adicionales). 
+
+**Cabe recalcar que la mayoría de los recursos habidos están en inglés, por lo que algunos de los ejemplos o conceptos se manejarán en dicho idioma para facilitar su búsqueda**
+
+# Tipos de datos
+
+De primera instancia, vamos a conocer algunos de los tipos de datos que pueden existir en R. Cada uno de estos tipos tienen sus ventajas, deventajas, usos y momentos adecuados en los cuales será más conveniente usar uno por sobre otro, pero no te preocupes, esto mejorará conforme la experiencia. En la siguiente tabla te presentamos algunos de los tipos de datos más básicos que utilizarás en R.
+
+| Tipo de dato   | Ejemplo    |
+| -------------- | ---------- |
+|     numeric    |     64.3   |
+|     integer    |     12     |
+|     logical    |     TRUE   |
+|     character  |    "apple" |
+
+## Numeric
+
+Este tipo de dato representa todos los datos numéricos, tengan decimales o no. A continuación veremos un ejemplo.
+
+```{r}
+altura <- 1.75
+peso <- 79
+```
+```{r}
+print(class(altura))
+print(class(peso))
+```
+
+En este punto es importante denotar algunas cosas. En la siguiense sección veremos los objetos `integer`, los cuales son relativamente similares, pero debe de quedar en claro que los objetos `numeric` representan cualquier número real, más no aquellos imaginarios.
+
+De la misma manera, vemos el uso de dos funciones útiles, `print()` y `class()`. Estas funciones lo que hacen es imprimir/visualizar un objeto y decirte el tipo de dicho objeto, respectivamente. 
+
+## Integer
+
+Este tipo de dato es muy parecido al numérico que recién vimos; sin embargo, tiene una diferencia clave **no considera decimales**. En otras palabras, solo puede manejar números enteros, sean negativos o positivios. En ocasiones, cuando asignamos un valor a nuestro objeto o variable, pese a ser un número entero, lo considera `numeric`, por lo que se puede usar el sufijo `L` para denotarlo.
+
+```{r}
+inte <- 16L
+```
+```{r}
+print(class(inte))
+```
+
+## Logical
+
+Si llevaste en algún punto de tu formación, temas de lógica Booleana, este tipo de dato será sencillo para ti. En este caso, los valores de este tipo de datos solo pueden ser dos: **TRUE** o **FALSE** (verdadera y falso). Este tipo de dato se obtiene tras evaluar condiciones o al poner el input de manera directa. Podemos ver unos ejemplos a continuación.
+
+```{r}
+# Evaluar una condición
+
+res <- 2>1
+print(class(res))
+print(res)
+```
+```{r}
+# Asignar el input de manera directa
+
+res <- FALSE
+print(class(res))
+print(res)
+```
+
+## Character
+
+Este tipo de dato es igualmente muy común y conformará parte esencial de tus trabajos y tareas que desarrollarás en el lenguaje R. En particular, este tipo de dato se refiere a todos aquellos que sean caracteres simples o *strings* completos de caracteres.
+
+```{r}
+# ejemplo de caracter aislado
+
+cha <- "A"
+
+print(class(cha))
+```
+```{r}
+# ejemplo de string de caracteres
+
+stg <- "string"
+
+print(class(stg))
+```
+
+# Data structures
+
+Las estructuras de datos se refiere a un modo particular en el que se organizan datos para poder manipularlos de manera más eficiente. La idea es tener estructuras especializadas para las diferentes tareas que se pueden realizar no solo en R, sino, que en los lenguajes de programación en general. Básicamente, podemos clasificar las estructuras según sus dimensiones (1D, 2D nD). Si bien se pueden organizar según sus dimensiones, estas estructuras de datos se pueden conformar por todos los tipos de datos que se discutieron anteriormente y más. De forma común no se mezclan todos los tipos de dato en una sola estructura, pero no podemos decir realmente que son inexistentes [^3].
+
+En particular, esta introducción discutirá algunas de las estructuras de datos más comunes. A continuación aprenderemos acerca de vectores, listas, dataframes y matrices.
+
+## Vectores
+
+Un vector, dicho de manera simple, es una colección ordenada de una longitud *n* que se conforma por cualquier tipo de dato básico. Este tipo de estructura de dato debe de contener la misma clase de dato, por lo que se considera que es homogéneo. 
+
+La forma más sencilla de generar un vector en R es a través del uso de la función `c()`. **Cada elemento dentro de nuestro vector, el cual es unidimensional, debe de estar sperado por una coma**, de lo contrario, R nos arrojará un error que no se puede leer el vector y no podremos guardar datos ni asignar objetos o variables. 
+
+```{r}
+first_vector <- c(1,2,3,4,5,5,2,3,4,2)
+
+first_vector
+```
+
+Como se acaba de demostrar, no siempre es necesario usar la función `print()` para imprimir nuestro objeto; sin embargo, a lo largo de esta guía se usará para señalar de manera explícita que buscamos imprimir nuestro objeto. Esto solo fue una demostración.
+
+Ahora, una parte importante de los vectores, es la longitud de los mismos, por lo que la función `length()` será muy útil desde los niveles más básicos, hasta lo más avanzado.
+
+```{r}
+print(length(first_vector))
+```
+
+## Listas
+
+Las listas son otro tipo de estructura de dato que organiza de manera ordenada una colección de objetos. A diferencia de los vectores, las listas pueden contener varios tipos de datos, por lo que se consideran heterogéneas. Estas estructuras son unidimensionales, pero contiene una diferencia importante; los elementos dentro de la lista pueden ser n-dinemsionales. Puede contener matrices, caracteres, vectores, etc.
+
+A continuación vamos a generar una lista de manera "directa" en una sola línea de código en esta ocasión.
+
+```{r}
+lst <- list("a"=2.5, "b"=TRUE, "c"=1:3, "nombre"="Jorge", "vec"=c("a","b"))
+
+print(class(lst))
+
+print(lst)
+```
+
+El modo en que se muestra es el ID de cada elemento y posteriormente muestra la información que está contenida en la etiqueta de la lista que le asignamos.
+
+## Dataframes
+
+Los dataframes sin objetos en los cuales podemos almacenar información de manera tabular, es decir, en forma de tabla. Este tipo de estructura es altamente utilizado en una gran cantidad de procesos, pipelines, funciones, etc., por lo que es importante saber su estructura y cómo se generan. Estos objetos son 2-D y pueden contener diferentes tipos de datos, lo que los hace heterogéneas; sin embargo, las columnas deben de contener el mismo tipo de datos a lo largo de sus renglones, aun cuando todas las columnas tengan diferentes tipos de dato. 
+
+Ahora aprovecharemos este espacio para incluir un aspecto importante que puede servir para practicar, o cuando tengas más experiencia, incluso tomar datos directamente de paquetes para hacer pruebas. Accederemnos a bases de datos pre-cargadas dentro de R.
+
+```{r}
+data()
+```
+Este comando habre en una nueva pestaña con las bases de datos que están pre-cargadas. En este caso, usaremos una de las más comúnes, `iris`.
+
+```{r}
+data("iris")
+```
+
+Ahora, ya veremos el dataframe que contiene esta base de datos. 
+
+```{r}
+print(head(iris))
+```
+
+Como vemos, tenemos 5 columnas con distintos datos, cada una con diferente nombre y la última tiene un tipo de dato diferente. De igual manera podemos ver el uso de una función útil, la cual es `head()`, esta función nos permite ver los primeros renglones de un dataframe, matrix o caulquier objeto que tenga varios renglones. De este modo, igual existe la función `tail()` la cual nos muestra los últimos renglones de nuestros datos.
+
+```{r}
+print(tail(iris))
+```
+
+Una vez quee ya vimos cómo es que se generan estas estructuras, vamos a ver cómo podemos formar las propias.
+
+```{r}
+
+df_1 <- data.frame(
+  "number" = 1:10,
+	"name" = c("one","two","tres","quatre","cinq","roku","nana","ocho","neuf","dix"),
+	"numeric" = c(1.1,2.2,3.3,4.4,5.5,6.6,7.7,8.8,9.9,10.1)
+  )
+
+print(df_1)
+```
+```{r}
+print(class(df_1)) 
+```
+
+## Matrices
+
+Este tipo de estructura tiene un solo tipo de dato, por lo que se considera homogénea. Así como en matemáticas, las matrices son muy usadas en este lenguaje, por la propia naturaleza con la que se creó y se mencionó en la introducción, por lo que los datos en las matrices son numéricos y se trabaja con ellos en este modo[^4]. El modo de leer una matriz, así como un dataframe, se hace leyendo primero el renglón y luego la clumna (x,y).
+
+Existen varios modos de generar matrices desde cero, así que en este caso veremos cómo e que se hace en una sola línea de código. Para este fin, usaremos la función `matrix()` con la cual podemos crear nuestras matrices.
+
+```{r}
+mat_1 <- matrix(1:10)
+
+print(mat_1)
+```
+
+Al observar este ejemplo, creamos de manera directa una matriz con una sola columna, pero con 10 renglones. Ahora veremos cómo se hacen varias columnas con varios renglones, asignando el número de dichos elementos que deseamos conformen nuestra matriz.
+
+```{r}
+mat_2 <- matrix(1:12, nrow=4,ncol=3)
+
+print(mat_2)
+```
+
+En este caso, asignamos 12 elementos numéricos en cuatro renglones y tres columnas. Es necesario recordar que los elementos deben de ser repartibles en el número de columnas y renglones que escogimos, de otro modo se omitirán o repitirán datos. 
+
+```{r}
+mat_3 <- matrix(1:2, nrow=4,ncol=3)
+
+print(mat_3)
+```
+```{r}
+mat_4 <- matrix(1:20, nrow=4,ncol=3)
+
+print(mat_4)
+```
+# Operadores
+
+R contiene una variedad de operadores para llevar a cabo operaciones matemáticas[^5], desde las más sencillas, hasta procesos complejos que requieren mucho procesamiento. En esta sección abarcaremos dos tipos de operador, los aritméticos y los relacionales. Para poder entender mejor el uso de estos operadores es necesario tener claras las bases indispensables de matemáticas y es recomendable, en el caso de los operadores relacionales, conocer acerca de lógica, aunque no es necesario. 
+
+Si tienes problemas en esta sección, más allá de poder comprender el código, te recomiendo fuertemente que busques algún curso de matemáticas para reforzar tu conocimiento, pueto que esto es parte de lo mínimo indispensable para poder programar de manera decente. No te preocupes si lo necesitas, es mejor saber cuándo volver a las bases antes de seguir con algo que probablemente no se entenderá del todo.
+
+## Operadores aritméticos
+
+Tal como dice su nombre, estos operadores son utilizados para llevar a cabo operaciones matemáticas. Todas las operaciones matemáticas con soluciones numéricas que puedas imaginar, son solucionables en R, así que no tengas miedo en probar. A continuación te muestro una tabla con los operadores aritméticos que cubriremos en este módulo.
+
+| Operador |     Descripción      |
+| -------- | -------------------- |
+|     +    |    Suma              |
+|     -    |    Resta             |
+|     *    |    Multiplicación    |
+|     /    |    División          |
+|     ^    |    Exponente         |
+|     %%   |    Módulo            |
+
+La suma es representada tal como se nos enseña cuando somos niños, usamos el signo **+**.
+
+```{r}
+2+2
+123123123+456456+4565
+123+45354+234+234
+```
+
+Tenemos la resta, la cual se representa del mismo modo que en las matemáticas básicas que todos conocemos.
+
+```{r}
+123-4-234
+123123-12-3-214-124
+```
+
+En el caso de la multiplicación, usaremos el asterisco \* para representar esta operación.
+
+```{r}
+123*234
+1*2*3*4*5
+```
+
+En el caso de la división, usamos la diagonal **/** para representar esta operación, así que usa la misma lógica que conocemos.
+
+```{r}
+123/324
+567/789
+6789679/234
+```
+
+Para representar exponentes, usamos el símbolo de caret **^** para poder asignar esta operación. Cabe recarlcar que considerará todo el número después de este símbolo como el exponente hasta que haya algún otro operador o un espacio.
+
+```{r}
+2^4
+12^7
+1^1+1
+```
+
+Usamos el operador modulo **%%** para obtener solo el residuo de una división del número de la izquierda entre el de la derecha. Suena un tanto extraño, quizás no lo esté explicando bien, pero quedará claro con los siguientes ejemplos.
+
+```{r}
+10%%3
+10%%2
+```
+
+Como vemos, se puede ver que tras dividir 10/3, nuestro residuo es 1; lo cual es nos arroja la operación.
+
+Dicho de manera sencilla, R puede fungir como nuestra calculadora con un poder para procesar impresionante. es importante saber que el lenguaje y lo que nos arroja no fallará, pero nuestra sintaxis y datos puede que sí. En este sentido debemos de ser muy conscientes que nuestros inputs deben de ser claros, pues de otro modo fallará por más preciso que sea R.
+
+## Operadores relacionales
+
+Los operadores relacionales son usados básicamente para hacer comparaciones entre distintos valores. El resultado del uso de estos operadores nos devuelve un valor Booleano, de modo que nunca nos devolverá un valor numérico per se aún cuando estemos comparando númers; aunque igualmente podemos comparar datos que no sean numéricos.
+
+| Operador |     Descripción      |
+| -------- | -------------------- |
+|     <    |    Menor que         |
+|     >    |    Mayor que         |
+|     <=   |    Menor o igual que |
+|     >=   |    Mayor o igual que |
+|     ==   |    Igual que         |
+|     !=   |No igual/diferente que|
+
+Primero, veremos el menor que, el cual es representado, al igual que cuando somos niños, por su propio símbolo. **<** En este ejemplo veremos que puede ser usado no solo en números. 
+
+```{r}
+12<123
+1<0
+"a"<"v"
+```
+
+A continuación usaremos el operador mayor que, el cual es igualmente representado con **>**.
+
+```{r}
+1>2
+12>23
+43>2
+"a">"b"
+```
+
+En algunos casos queremos que se cumplan ciertos criterios, como que sea menor o igual, no siempre debe de ser menor; en este caso usamos una combinación entre el símbolo de menor que acompañado con un signo de igual.
+
+```{r}
+12<=45
+456<=12
+2<=2
+```
+
+Tal como con el operador anterior, usamos la misma lógiuca para cuando queremos valores iguales o mayores que otro.
+
+```{r}
+12>=123
+5678>=324
+5>=5
+```
+
+Cuando queremos demostrar igualdades, usamos dos signos de igual juntos, sin espacio. Solo en casos que tengan el mismo valor será un resultado **TRUE**, de lo contrario, y por obviedad, **FALSE**.
+
+```{r}
+234==234
+23.00001==23.0000001
+```
+
+Consideremos lo que previamente habíamos dicho, no solo aplica con números, incluso podemos usar vectores u otras estructuras con caracteres o cualquier combinación que imaginemos
+
+```{r}
+vc_1 <- c("a","b","c")
+vc_2 <- c("c","b","a")
+
+vc_1==vc_2
+```
+
+Finalmente, veremos el operador *NO es igual/es diferente que*, el cual combina un signo de exclamación junto con un signo de igual.
+
+```{r}
+"a" != "a"
+"c" != 1
+22 != 22
+```
+
+# Funciones de utilidad
+
+Ahora bien, hemos visto algunos conceptos básicos que te serán útiles para tu aprendizaje del lenguaje R, pero no nos hemos adentrado del todo. Más adelante te darás cuenta que muchas veces puedes generar tus propias funciones, es decir, escribir códigos con estados y variables declaradas que podrán ser interpretados con R para ejecutar ciertas tareas de manera automática; pero, como habrás visto, también existen funciones que otras personas ya han creado y puedes hacer uso de ellas. Es necesario recordar que las funciones se componen del nombre de la función y argumentos; al menos esto solo de manera básica.
+
+En esta sección aprenderemos acerca de algunas funciones útiles que, sin importar en qué materia estés trabajando, probablemente termines utilizando eventualmente.
+
+## `install.packages()`
+
+Los paquetes que se ofrecen en R, y en la mayoría de los lenguajes, son colecciones de funciones que se pueden descargar y guardar como bibliotecas; una vez descargado un paquete, no es necesario volverlo a descargar a menos que se desinstale. Para descargar los paquetes, usaremos la función `install.packages()`. A continuación veremos un ejemplo de descarga de un paquete bastante útil.
+
+```
+install.packages("vegan")
+```
+
+Si te fijas, se escribe con minúsculas y el nombre del paquete está en comillas. Esta es la estructura general que sigue esta función. Es importante que sepas la sintaxis de los argumentos que puede tener esta función, auqnue esto no debe de ser de memoria. En la siguiente función, veremos cómo puedes buscar la documentación de una función de manera sencilla.
+
+## `help()`
+
+De aquí en adelante, no se explicará con mayor detalle que una breve explicación para qué sirve cada función. Esto se debe a la existencia de esta gran función. `help()` es una función en la que podemos poner como argumento el nombre de una función de la cual tengamos dudas, es decir, es nuestra primera línea para poder afrontar el océano de información, funciones y datos que nos ofrece el internet.
+
+```{r}
+help("help")
+```
+
+**Si corres este Markdown, se abrirá una página de internet con la documentación de la función `help()`.**
+
+## `plot()`
+
+Draw a scatter plot with decorations such as axes and titles in the active graphics window.
+
+```{r}
+plot(cars)
+```
+
+## `read.csv()`
+
+Reads a file in table format and creates a data frame from it, with cases corresponding to lines and variables to fields in the file.
+
+```{r}
+test1 <- c(1:5, "6,7", "8,9,10")
+tf <- tempfile()
+writeLines(test1, tf)
+
+read.csv(tf, fill = TRUE) # 1 column
+ncol <- max(count.fields(tf, sep = ","))
+read.csv(tf, fill = TRUE, header = FALSE,
+         col.names = paste0("V", seq_len(ncol)))
+unlink(tf)
+```
+
+## `t()`
+
+Given a matrix or data.frame x, t returns the transpose of x.
+
+```{r}
+cars
+```
+```{r}
+t(cars)
+```
+
+## `sum()`, `sqrt()`, `sd()`, `log()`
+
+En este caso ponemos en conjunto varias funciones que son usadas de manera matemática.
+
+### `sum()`
+
+sum returns the sum of all the values present in its arguments.
+
+```{r}
+sum(1,2,4)
+```
+
+### `sqrt()`
+
+abs(x) computes the absolute value of x, sqrt(x) computes the (principal) square root of x, √{x}.
+
+```{r}
+sqrt(123434)
+```
+
+### `sd()`
+
+This function computes the standard deviation of the values in x. If na.rm is TRUE then missing values are removed before computation proceeds.
+
+```{r}
+sd(1:2) ^ 2
+```
+
+### `log()`
+
+log computes logarithms, by default natural logarithms, log10 computes common (i.e., base 10) logarithms, and log2 computes binary (i.e., base 2) logarithms. The general form log(x, base) computes logarithms with base base.
+
+```{r}
+log(exp(3))
+```
+
+## `range()`
+
+range returns a vector containing the minimum and maximum of all the given arguments.
+
+```{r}
+x <- c(123,345,345.345,1.1,0.1)
+range(x)
+```
+
+## `ncol()`
+
+nrow and ncol return the number of rows or columns present in x. NCOL and NROW do the same treating a vector as 1-column matrix, even a 0-length vector, compatibly with as.matrix() or cbind(), see the example.
+
+```{r}
+mtcars
+```
+
+```{r}
+ncol(mtcars)
+```
+
+## `nrow()`
+
+nrow and ncol return the number of rows or columns present in x. NCOL and NROW do the same treating a vector as 1-column matrix, even a 0-length vector, compatibly with as.matrix() or cbind(), see the example.
+
+```{r}
+mtcars
+```
+
+```{r}
+nrow(mtcars)
+```
+
+## `colnames()`
+
+Retrieve or set the row or column names of a matrix-like object.
+
+```{r}
+colnames(mtcars)
+```
+
+## `rownames()`
+
+Retrieve or set the row or column names of a matrix-like object.
+
+```{r}
+rownames(mtcars)
+```
+
+## `sort()`
+
+Sort (or order) a vector or factor (partially) into ascending or descending order. For ordering along more than one variable, e.g., for sorting data frames, see order.
+
+```{r}
+x <- swiss$Education[1:25]
+x; sort(x); sort(x, partial = c(10, 15))
+```
+
+## `View()`
+
+Invoke a spreadsheet-style data viewer on a matrix-like R object.
+
+```
+View(mtcars)
+```
+# Ejercicios
+
+En este apartado usaremos lo que hemos aprendido en las secciones anteriores de manera sencilla y básica. Es importante aclarar que algunas funciones no las hemos visto en esta introducción, de modo que deberás de buscar las funciones o las estrategias necesarias para poder cumplir con las instrucciones. En la sub-sección que sigue, se incluirán respuestas de cómo hacer lo que se te pide, pero debes de tener en cuenta que existen infinidad de maneras de realizar una misma tarea; siempre y cuando el resultado sea el mismo, no te preocupes.
+
+1. Carga la base de datos llamada "Daphnia_data.csv" que puedes encontrar en la carpeta de "Datos".
+
+## Respuestas
+
+# Recursos adicionales
+
+1. https://www.r-project.org
+2. http://www.cookbook-r.com
+3. https://www.statmethods.net
+4. https://r-coder.com/introduccion-r/
+5. https://www.tutorialspoint.com/r/index.htm
+
+# Bibliografía 
+
+[^1]: https://www.r-project.org
+[^2]: Gentleman, Robert; Carey, Vincent J.; Huber, Wolfgang; Irizarry, Rafael A.; Dudoit, Sandrine  (2005). [Statistics for Biology and Health] Bioinformatics and Computational Biology Solutions Using R and Bioconductor, 10.1007/0-387-29362-0(), doi:10.1007/0-387-29362-0.
+[^3]: https://www.geeksforgeeks.org/data-structures-in-r-programming/
+[^4]: https://bookdown.org/jboscomendoza/r-principiantes4/matrices-y-arrays.html
+[^5]: https://www.datamentor.io/r-programming/operator/
