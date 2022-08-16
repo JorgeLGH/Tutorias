@@ -223,6 +223,121 @@ mat_4 <- matrix(1:20, nrow=4,ncol=3)
 
 print(mat_4)
 ```
+
+# Manipular objetos
+
+Ya hemos visto varias de las estructuras y tipos de objetos que podemos utilizar en R; sin embargo, esto es un conocimiento limitado, ya que el verdadero uso de un lenguaje es la capacidad de maniuplar y analizar la ifnromación y objetos que tenemos. En este sentido vamos a aprender a acceder a ciertos puntos espec´+ificos de información, añadir, eliminar, etc. Dicho de manera sencilla, veremos algunos ejemplos de usos un poco más reales de lo que se hace con R.
+
+## Seleccionar columnas/renglones
+
+Los dataframes y matrices que hemos visto anteriormente tienen dimensiones en las que podemos comunicarnos de manera sencilla con renglones y columnas. Esta estructura de nuestros datos hace que sea necesario, en algunos casos, poder seleccionar que se visualice o guarde en un objeto, solo ciertas partes de nuestros datos originales.
+
+```{r}
+print(mtcars)
+```
+
+Como vemos, nuestro objeto `mtcars` es un data.frame con información relevante de motores de ciertos vehículos y su rendimiento específico. Ahora, digamos, que solo nos interesa saber cuántas millas por galón de gasolina rinde cada motor, así que lo vamos a aislar.
+
+```{r}
+mtcars["mpg"]
+```
+
+En el caso anterior acabamos de ver cómo es que seleccionamos la columna que nos interesa, en este caso *mpg*. Es posible acceder a columnas específcas con el uso de corchetes **[]**. Dentro de estos corchetes podemos escribir los nombres de las columnas que queremos obtener, esto si sabemos el nombre; pero no solo se puede hacer con el nombre, esto puede hacerse con los números de igual medida.
+
+```{r}
+mtcars[1]
+```
+
+## Escoger datos específicos
+
+Ahora veremos cómo seleccionar más de una columna. En el caso del uso de números, se puede poner un rango, mintras que en el caso del nombre directo, debemos de concatenar cuantos nombres uno quiera.
+
+```{r}
+mtcars[1:2]
+```
+```{r}
+mtcars[c("mpg","cyl")]
+```
+
+En este sentido, se puede hacer exactamente lo mismo con los renglones; pero aquí es donde la ya vista forma de leer nuestras estructuras, nos resulta indispoensable. Si no lo has olvidado, la forma de leer estas estructuras es primero el renglón y luego la columna, así que si queremos acceder a un renglón, debemos de señalar cuál. En este ejemplo usando *mtcars*, digamos que solo nos interesa la información del Merc 280. 
+
+**Para acceder al renglón, se debe de poner una coma que señale que queremos una parte específica**
+
+```{r}
+mtcars["Merc 280", ]
+```
+```{r}
+mtcars[10,]
+```
+
+Ahora combinemos ambas cosas para acceder a números específicos. Vamos a querer el peso del motor del Lotus Europa.
+
+```{r}
+mtcars["Lotus Europa","wt"]
+```
+```{r}
+mtcars[28,6]
+```
+
+Ahora bien, hemos visto que estas estrategias se pueden usar en nuestros objetos con más de una dimensión, pero no debemos olvidar que muchas de estas técnicas son igualmente aplicables en, por ejemplo, un vector. Como veremos en el siguiente ejemplo, se puede escoger de manera sencilla elementos específicos dentro de un vector.
+
+```{r}
+vec_1 <- c(9891,2,3,5,6,78,23,0.001,43898)
+
+vec_1[1]
+
+vec_1[2:5]
+```
+
+## Añadir/Eliminar datos
+
+En este caso veremos cómo se pueden eliminar, por ejemplo, valores de un vector/matriz/dataframe existente, eliminar valores únicos o varios a la vez será de utilidad siempre en el análisis de datos.. La lógica es igual a la del acceso, pero con una sintaxis un poco diferente.
+
+**¡¡¡Es iportante notar que solo estamos haciendo cambios temporales, para hacer cambios definitivos se tiene que generar un nuevo objeto o redefinir el existente!!!**
+
+```{r}
+mtcars
+```
+```{r}
+mtcars[-1]
+```
+
+En este caso NO veremos la forma de hacerlo haciendo una selección con el nombre de la columna. 
+
+La misma lógica que aplicamos anteriormente se puede usar con los renglones y en combinación con las columnas.
+
+```{r}
+mtcars[-(1:2),-(1:5)]
+```
+
+Así como en la vez anterior, lo mismo se puede observar en la manipulación de vectores.
+
+```{r}
+vec_1 <- c(9891,2,3,5,6,78,23,0.001,43898)
+
+vec_1[-(1:5)]
+```
+
+Para definir el nuevo objeto con los elementos eliminados, solo se tiene que reescribir o definir un nuevo objeto. Lo mismo aplica para matrices/dataframes.
+
+```{r}
+vec_1 <- c(9891,2,3,5,6,78,23,0.001,43898)
+
+vec_1
+```
+```{r}
+vec_2 <- vec_1[-(1:5)]
+vec_1 <- vec_1[-(1:5)]
+```
+```{r}
+vec_1
+vec_2
+```
+
+## Modificar datos
+
+
+
 # Operadores
 
 R contiene una variedad de operadores para llevar a cabo operaciones matemáticas[^5], desde las más sencillas, hasta procesos complejos que requieren mucho procesamiento. En esta sección abarcaremos dos tipos de operador, los aritméticos y los relacionales. Para poder entender mejor el uso de estos operadores es necesario tener claras las bases indispensables de matemáticas y es recomendable, en el caso de los operadores relacionales, conocer acerca de lógica, aunque no es necesario. 
@@ -527,9 +642,32 @@ View(mtcars)
 
 En este apartado usaremos lo que hemos aprendido en las secciones anteriores de manera sencilla y básica. Es importante aclarar que algunas funciones no las hemos visto en esta introducción, de modo que deberás de buscar las funciones o las estrategias necesarias para poder cumplir con las instrucciones. En la sub-sección que sigue, se incluirán respuestas de cómo hacer lo que se te pide, pero debes de tener en cuenta que existen infinidad de maneras de realizar una misma tarea; siempre y cuando el resultado sea el mismo, no te preocupes.
 
-1. Carga la base de datos llamada "Daphnia_data.csv" que puedes encontrar en la carpeta de "Datos".
+1. Carga la base de datos llamada "Daphnia_data.csv" que puedes encontrar en la carpeta de "Datos" y asígnalo en un objeto llamado daphnia.
+2. Demuestra de qué tipo es nuestro objeto daphnia.
+3. Genera una columna nueva llamada "new_col" que tenga una repetición de los números 1:3 hasta llenar todos los renglones.
 
 ## Respuestas
+
+```{r}
+# 1. Carga la base de datos llamada "Daphnia_data.csv" que puedes encontrar en la carpeta de "Datos" y asígnalo en un objeto llamado daphnia.
+
+daphnia <- read.csv("Datos/Daphnia_data.csv")
+
+# 2. Demuestra de qué tipo es nuestro objeto daphnia.
+
+class(daphnia)
+
+# 3. Genera una columna nueva llamada "new_col" que tenga una repetición de los números 1:3 hasta llenar todos los renglones.
+
+## Vamos a ver cuántos renglones hay y cuánmtas veces cabe nuestra repetición de números en los renglones 
+numb <- nrow(daphnia)
+capacity <- numb/3
+## Asignar una nueva columna
+daphnia["new_col"] <- rep(1:3, 24)
+## Corroborar que esté la nueva columna
+daphnia
+```
+
 
 # Recursos adicionales
 
