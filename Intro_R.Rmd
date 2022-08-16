@@ -361,12 +361,176 @@ Finalmente, veremos el operador *NO es igual/es diferente que*, el cual combina 
 22 != 22
 ```
 
+# Funciones de utilidad
+
+Ahora bien, hemos visto algunos conceptos básicos que te serán útiles para tu aprendizaje del lenguaje R, pero no nos hemos adentrado del todo. Más adelante te darás cuenta que muchas veces puedes generar tus propias funciones, es decir, escribir códigos con estados y variables declaradas que podrán ser interpretados con R para ejecutar ciertas tareas de manera automática; pero, como habrás visto, también existen funciones que otras personas ya han creado y puedes hacer uso de ellas. Es necesario recordar que las funciones se componen del nombre de la función y argumentos; al menos esto solo de manera básica.
+
+En esta sección aprenderemos acerca de algunas funciones útiles que, sin importar en qué materia estés trabajando, probablemente termines utilizando eventualmente.
+
+## `install.packages()`
+
+Los paquetes que se ofrecen en R, y en la mayoría de los lenguajes, son colecciones de funciones que se pueden descargar y guardar como bibliotecas; una vez descargado un paquete, no es necesario volverlo a descargar a menos que se desinstale. Para descargar los paquetes, usaremos la función `install.packages()`. A continuación veremos un ejemplo de descarga de un paquete bastante útil.
+
+```
+install.packages("vegan")
+```
+
+Si te fijas, se escribe con minúsculas y el nombre del paquete está en comillas. Esta es la estructura general que sigue esta función. Es importante que sepas la sintaxis de los argumentos que puede tener esta función, auqnue esto no debe de ser de memoria. En la siguiente función, veremos cómo puedes buscar la documentación de una función de manera sencilla.
+
+## `help()`
+
+De aquí en adelante, no se explicará con mayor detalle que una breve explicación para qué sirve cada función. Esto se debe a la existencia de esta gran función. `help()` es una función en la que podemos poner como argumento el nombre de una función de la cual tengamos dudas, es decir, es nuestra primera línea para poder afrontar el océano de información, funciones y datos que nos ofrece el internet.
+
+```{r}
+help("help")
+```
+
+**Si corres este Markdown, se abrirá una página de internet con la documentación de la función `help()`.**
+
+## `plot()`
+
+Draw a scatter plot with decorations such as axes and titles in the active graphics window.
+
+```{r}
+plot(cars)
+```
+
+## `read.csv()`
+
+Reads a file in table format and creates a data frame from it, with cases corresponding to lines and variables to fields in the file.
+
+```{r}
+test1 <- c(1:5, "6,7", "8,9,10")
+tf <- tempfile()
+writeLines(test1, tf)
+
+read.csv(tf, fill = TRUE) # 1 column
+ncol <- max(count.fields(tf, sep = ","))
+read.csv(tf, fill = TRUE, header = FALSE,
+         col.names = paste0("V", seq_len(ncol)))
+unlink(tf)
+```
+
+## `t()`
+
+Given a matrix or data.frame x, t returns the transpose of x.
+
+```{r}
+cars
+```
+```{r}
+t(cars)
+```
+
+## `sum()`, `sqrt()`, `sd()`, `log()`
+
+En este caso ponemos en conjunto varias funciones que son usadas de manera matemática.
+
+### `sum()`
+
+sum returns the sum of all the values present in its arguments.
+
+```{r}
+sum(1,2,4)
+```
+
+### `sqrt()`
+
+abs(x) computes the absolute value of x, sqrt(x) computes the (principal) square root of x, √{x}.
+
+```{r}
+sqrt(123434)
+```
+
+### `sd()`
+
+This function computes the standard deviation of the values in x. If na.rm is TRUE then missing values are removed before computation proceeds.
+
+```{r}
+sd(1:2) ^ 2
+```
+
+### `log()`
+
+log computes logarithms, by default natural logarithms, log10 computes common (i.e., base 10) logarithms, and log2 computes binary (i.e., base 2) logarithms. The general form log(x, base) computes logarithms with base base.
+
+```{r}
+log(exp(3))
+```
+
+## `range()`
+
+range returns a vector containing the minimum and maximum of all the given arguments.
+
+```{r}
+x <- c(123,345,345.345,1.1,0.1)
+range(x)
+```
+
+## `ncol()`
+
+nrow and ncol return the number of rows or columns present in x. NCOL and NROW do the same treating a vector as 1-column matrix, even a 0-length vector, compatibly with as.matrix() or cbind(), see the example.
+
+```{r}
+mtcars
+```
+
+```{r}
+ncol(mtcars)
+```
+
+## `nrow()`
+
+nrow and ncol return the number of rows or columns present in x. NCOL and NROW do the same treating a vector as 1-column matrix, even a 0-length vector, compatibly with as.matrix() or cbind(), see the example.
+
+```{r}
+mtcars
+```
+
+```{r}
+nrow(mtcars)
+```
+
+## `colnames()`
+
+Retrieve or set the row or column names of a matrix-like object.
+
+```{r}
+colnames(mtcars)
+```
+
+## `rownames()`
+
+Retrieve or set the row or column names of a matrix-like object.
+
+```{r}
+rownames(mtcars)
+```
+
+## `sort()`
+
+Sort (or order) a vector or factor (partially) into ascending or descending order. For ordering along more than one variable, e.g., for sorting data frames, see order.
+
+```{r}
+x <- swiss$Education[1:25]
+x; sort(x); sort(x, partial = c(10, 15))
+```
+
+## `View()`
+
+Invoke a spreadsheet-style data viewer on a matrix-like R object.
+
+```
+View(mtcars)
+```
+
 # Recursos adicionales
 
 1. https://www.r-project.org
 2. http://www.cookbook-r.com
 3. https://www.statmethods.net
 4. https://r-coder.com/introduccion-r/
+5. https://www.tutorialspoint.com/r/index.htm
 
 # Bibliografía 
 
