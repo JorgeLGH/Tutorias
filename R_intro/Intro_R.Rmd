@@ -336,7 +336,46 @@ vec_2
 
 ## Modificar datos
 
+Ahora bien, ya vimos cómo se pueden añadir o eliminar algunos valores dentro de nuestros objetos que hemos creado, pero habrá situaciones en las que querremos generar algúnt ipo de cambio en específico; es decir, solo cambiar el valor de una variable o de algún dato dentro de nuestros objetos en específico. A continuación presentaremos modos en los que se pueden modificar valores en específico dentro de matrices y vectores, solo por dar algunos ejemplos.
 
+```{r}
+# Generamos nuestro vector original 
+
+vec_1 <- c(9891,2,3,5,6,78,23,0.001,43898)
+```
+
+Ahora, como vemos, nuestro vector ya tiene valores asignados, y nos damos cuenta que tenemos todos valores numéricos enteros a excepción de uno, de modo que queremos cambiarlo. Primero vamos a ubicar nuestro valor que no cumple con la condición que deseamos y lo vamos a cambiar.
+
+```{r}
+length(vec_1)
+```
+
+Dado que tiene una longitud de 9 nuestro vector, y sabemos que nuestro valor que queremos cambiar es el penúltimo, podemnos hacer el cambio de manera inmediata.
+
+```{r}
+vec_1[8]<- 1
+```
+```{r}
+vec_1
+```
+
+Veremos lo mismo ahora con una matriz.
+
+```{r}
+# Definimos nuestra matriz
+
+mat_1 <- matrix(1:10, nrow = 2)
+
+mat_1
+```
+
+Ahora vamos a cambiar un valor arbitrario por otro. En este caso escogemos el quinto valor en nuestra primera fila.
+
+```{r}
+mat_1[1,5] <- 0.00123
+
+mat_1
+```
 
 # Operadores
 
@@ -640,11 +679,13 @@ View(mtcars)
 ```
 # Ejercicios
 
-En este apartado usaremos lo que hemos aprendido en las secciones anteriores de manera sencilla y básica. Es importante aclarar que algunas funciones no las hemos visto en esta introducción, de modo que deberás de buscar las funciones o las estrategias necesarias para poder cumplir con las instrucciones. En la sub-sección que sigue, se incluirán respuestas de cómo hacer lo que se te pide, pero debes de tener en cuenta que existen infinidad de maneras de realizar una misma tarea; siempre y cuando el resultado sea el mismo, no te preocupes.
+En este apartado usaremos lo que hemos aprendido en las secciones anteriores de manera sencilla y básica. Es importante aclarar que algunas funciones no las hemos visto en esta introducción, de modo que deberás de buscar las funciones o las estrategias necesarias para poder cumplir con las instrucciones. En la sub-sección que sigue, se incluirán respuestas de cómo hacer lo que se te pide, pero debes de tener en cuenta que existen infinidad de maneras de realizar una misma tarea; **siempre y cuando el resultado sea el mismo, no te preocupes.**
 
 1. Carga la base de datos llamada "Daphnia_data.csv" que puedes encontrar en la carpeta de "Datos" y asígnalo en un objeto llamado daphnia.
 2. Demuestra de qué tipo es nuestro objeto daphnia.
 3. Genera una columna nueva llamada "new_col" que tenga una repetición de los números 1:3 hasta llenar todos los renglones.
+4. Elimina las últimas 5 filas de nuestro objeto y asígnalo a un nuevo objeto llamado "daphnia_mod".
+5. Determina la diferencia de promedios de crecimiento entre nuestro dataframe `dpahnia` original y el modificado.
 
 ## Respuestas
 
@@ -652,11 +693,13 @@ En este apartado usaremos lo que hemos aprendido en las secciones anteriores de 
 # 1. Carga la base de datos llamada "Daphnia_data.csv" que puedes encontrar en la carpeta de "Datos" y asígnalo en un objeto llamado daphnia.
 
 daphnia <- read.csv("Datos/Daphnia_data.csv")
-
+```
+```{r}
 # 2. Demuestra de qué tipo es nuestro objeto daphnia.
 
 class(daphnia)
-
+```
+```{r}
 # 3. Genera una columna nueva llamada "new_col" que tenga una repetición de los números 1:3 hasta llenar todos los renglones.
 
 ## Vamos a ver cuántos renglones hay y cuánmtas veces cabe nuestra repetición de números en los renglones 
@@ -665,7 +708,26 @@ capacity <- numb/3
 ## Asignar una nueva columna
 daphnia["new_col"] <- rep(1:3, 24)
 ## Corroborar que esté la nueva columna
-daphnia
+head(daphnia)
+```
+```{r}
+# 4. Elimina las últimas 5 filas de nuestro objeto y asígnalo a un nuevo objeto llamado "daphnia_mod".
+
+daphnia_mod <- daphnia[-c((nrow(daphnia)-4):nrow(daphnia)),]
+tail(daphnia_mod)
+```
+
+**Parece que quitamos solo 4 filas, pero mira bien el número final y compáralo con el inicial**
+
+```{r}
+# 5. Determina la diferencia de promedios de crecimiento entre nuestro dataframe `dpahnia` original y el modificado.
+
+# Obetener las medias de crecimiento de cada una de las dataframes
+mean_1 <- mean(daphnia$Growth.rate)
+mean_2 <- mean(daphnia_mod$Growth.rate)
+
+# Hacer la compración
+mean_1-mean_2
 ```
 
 
